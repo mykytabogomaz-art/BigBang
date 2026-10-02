@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Day Quiz</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        /* Compact layout to fit on one screen */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: #f9f9f9;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        body {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Centers content vertically */
+            gap: 15px; /* Space between text and questions */
+        }
+
+        /* Top Section: Text (Left) and Image (Right) */
+        .content-wrapper {
+            display: flex;
+            gap: 20px;
+            align-items: stretch;
+            flex: 0 1 auto;
+        }
+
+        .story-box {
+            flex: 3;
+            background-color: #fff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .image-container {
+            flex: 2;
+            background-color: #e0e0e0;
+            border: 3px dashed #999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 10px;
+            color: #555;
+            font-weight: bold;
+            border-radius: 8px;
+            min-height: 150px;
+        }
+
+        /* Bottom Section: 2-Column Grid for Questions */
+        .questions-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            flex: 1 1 auto;
+        }
+
+        .question-container {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-left: 5px solid #3498db;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .question-text {
+            font-weight: bold;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .select-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        select {
+            padding: 5px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fafafa;
+            cursor: pointer;
+            flex: 1; /* Helps dropdowns fit the column nicely */
+            min-width: 100px;
+        }
+
+        .bottom-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        button {
+            padding: 8px 15px;
+            font-size: 14px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+            white-space: nowrap;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .feedback {
+            font-weight: bold;
+            font-size: 14px;
+            text-align: right;
+            flex: 1;
+        }
+
+        .correct { color: #27ae60; }
+        .incorrect { color: #e74c3c; }
+    </style>
+</head>
+<body>
+
+    <!-- SIDE-BY-SIDE CONTENT WRAPPER -->
+    <div class="content-wrapper">
+        
+        <!-- TEXT SECTION (LEFT) -->
+        <div class="story-box">
+            <p style="margin:0;">Sheldon, Leonard, and Penny go to the big shopping mall on Saturday. Penny wants to buy a new red dress and beautiful shoes. Sheldon does not like clothes shops, so he walks to the comic book store. Leonard looks for a fun video game to play at home. Then, they go to a candy shop. They buy different chocolates like Milka and Milky Way. After shopping, they sit down and eat hot pizza together.</p>
+        </div>
+
+        <!-- IMAGE PLACEHOLDER (RIGHT) -->
+        <div class="image-container">
+            
+            <img src="1.jpg" style="max-width:100%; max-height:150px;"/>
+        </div>
+
+    </div>
+
+    <!-- 2-COLUMN QUESTIONS GRID -->
+    <div class="questions-grid">
+
+        <!-- QUESTION 1 -->
+        <div class="question-container">
+            <div class="question-text">1. Where do Sheldon, Leonard, and Penny go on Saturday?</div>
+            <div class="select-group">
+                <select id="q1-p1">
+                    <option value="">-- Who? --</option>
+                    <option value="wrong">He</option>
+                    <option value="correct">They</option>
+                    <option value="wrong">She</option>
+                </select>
+                <select id="q1-p2">
+                    <option value="">-- Action --</option>
+                    <option value="correct">go</option>
+                    <option value="wrong">goes</option>
+                    <option value="wrong">going</option>
+                </select>
+                <select id="q1-p3">
+                    <option value="">-- Where? --</option>
+                    <option value="correct">to the big shopping mall.</option>
+                    <option value="wrong">to the comic book store.</option>
+                    <option value="wrong">to the candy shop.</option>
+                </select>
+            </div>
+            <div class="bottom-row">
+                <button onclick="checkAnswer('q1', 3)">Check</button>
+                <div id="q1-feedback" class="feedback"></div>
+            </div>
+        </div>
+
+        <!-- QUESTION 2 -->
+        <div class="question-container">
+            <div class="question-text">2. What does Penny want to buy at the mall?</div>
+            <div class="select-group">
+                <select id="q2-p1">
+                    <option value="">-- Who? --</option>
+                    <option value="wrong">Sheldon</option>
+                    <option value="correct">Penny</option>
+                    <option value="wrong">Leonard</option>
+                </select>
+                <select id="q2-p2">
+                    <option value="">-- Action --</option>
+                    <option value="wrong">want to buy</option>
+                    <option value="correct">wants to buy</option>
+                    <option value="wrong">buying</option>
+                </select>
+                <select id="q2-p3">
+                    <option value="">-- What? --</option>
+                    <option value="wrong">a new video game.</option>
+                    <option value="wrong">beautiful shoes and pizza.</option>
+                    <option value="correct">a new red dress and beautiful shoes.</option>
+                </select>
+            </div>
+            <div class="bottom-row">
+                <button onclick="checkAnswer('q2', 3)">Check</button>
+                <div id="q2-feedback" class="feedback"></div>
+            </div>
+        </div>
+
+        <!-- QUESTION 3 -->
+        <div class="question-container">
+            <div class="question-text">3. What kind of chocolates do they buy at the candy shop?</div>
+            <div class="select-group">
+                <select id="q3-p1">
+                    <option value="">-- Who? --</option>
+                    <option value="wrong">Penny</option>
+                    <option value="wrong">Sheldon</option>
+                    <option value="correct">They</option>
+                </select>
+                <select id="q3-p2">
+                    <option value="">-- Action --</option>
+                    <option value="correct">buy</option>
+                    <option value="wrong">buys</option>
+                    <option value="wrong">bought</option>
+                </select>
+                <select id="q3-p3">
+                    <option value="">-- What? --</option>
+                    <option value="correct">Milka and Milky Way.</option>
+                    <option value="wrong">pizza and video games.</option>
+                    <option value="wrong">Snickers and Twix.</option>
+                </select>
+            </div>
+            <div class="bottom-row">
+                <button onclick="checkAnswer('q3', 3)">Check</button>
+                <div id="q3-feedback" class="feedback"></div>
+            </div>
+        </div>
+
+        <!-- QUESTION 4 -->
+        <div class="question-container">
+            <div class="question-text">4. What do the friends eat after they finish shopping?</div>
+            <div class="select-group">
+                <select id="q4-p1">
+                    <option value="">-- Who? --</option>
+                    <option value="wrong">The boys</option>
+                    <option value="wrong">Penny</option>
+                    <option value="correct">The friends</option>
+                </select>
+                <select id="q4-p2">
+                    <option value="">-- Action --</option>
+                    <option value="correct">eat</option>
+                    <option value="wrong">eats</option>
+                    <option value="wrong">eating</option>
+                </select>
+                <select id="q4-p3">
+                    <option value="">-- What? --</option>
+                    <option value="wrong">chocolates.</option>
+                    <option value="correct">hot pizza.</option>
+                    <option value="wrong">a red dress.</option>
+                </select>
+            </div>
+            <div class="bottom-row">
+                <button onclick="checkAnswer('q4', 3)">Check</button>
+                <div id="q4-feedback" class="feedback"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function checkAnswer(questionId, parts) {
+            let isCorrect = true;
+            let isComplete = true;
+
+            for (let i = 1; i <= parts; i++) {
+                let selectElement = document.getElementById(questionId + '-p' + i);
+                if (selectElement.value === "") {
+                    isComplete = false;
+                } else if (selectElement.value !== "correct") {
+                    isCorrect = false;
+                }
+            }
+
+            let feedbackElement = document.getElementById(questionId + '-feedback');
+            
+            if (!isComplete) {
+                feedbackElement.innerHTML = "Select all parts!";
+                feedbackElement.className = "feedback incorrect";
+            } else if (isCorrect) {
+                feedbackElement.innerHTML = "Correct! 🎉";
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.innerHTML = "Try again! ❌";
+                feedbackElement.className = "feedback incorrect";
+            }
+        }
+    </script>
+
+</body>
+</html>
